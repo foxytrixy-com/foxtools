@@ -1,0 +1,102 @@
+swagger: '2.0'
+info:
+  title: test
+  version: "0.1.0"
+consumes:
+  - application/json
+produces:
+  - application/json
+#parameters:
+#  $ref: src/date/timeml
+
+basePath: /0.1
+paths:
+  /hello_world:
+    get:
+      tags: [hello_world]
+      operationId: main.test.hello_world
+      responses:
+        200:
+          description: Hello world sucessful
+        404:
+          description: Not Found
+
+  /time:
+    post:
+      tags: [time]
+      operationId: tricks.time.post
+      parameters:
+      - name: j_env
+        in: body
+        description: environment
+        schema:
+          type: object
+          properties:
+            chatroom:
+              type: object
+              properties:
+                timezone:
+                  $ref: "#/definitions/Timezone"
+            command:
+              type: object
+              properties:
+                uuid:
+                  $ref: "#/definitions/Uuid"
+                locations:
+                  $ref: "#/definitions/Locations_timezone"
+
+      responses:
+        200:
+          description: update time
+        404:
+          description: Error
+
+  /py2json:
+    put:
+      tags: [py2json]
+      operationId: tricks.py2json.put
+      parameters:
+      - name: s
+        description: Some message.
+        in: body
+        schema:
+          type: string
+      - name: indent
+        description: json.dumps() indent parameter
+        in: query
+        type: integer
+      responses:
+        200:
+          description: update time
+        404:
+          description: Error
+
+  /calculator:
+    get:
+      tags: [calculator]
+      operationId: tricks.calculator.calculate
+      parameters:
+      - name: s_IN
+        description: Some message.
+        in: query
+#        schema:
+        type: string
+      responses:
+        200:
+          description: update time
+        404:
+          description: Error
+
+
+definitions:
+  Uuid:
+    type: string
+    example: "asdfasdfasdfasdf"
+  Timezone:
+    type: string
+    example: "Asia/Singapore"
+  Locations_timezone:
+    type: array
+    items:
+      type: string
+    example: ["tokyo","Asia/Bangkok"]
