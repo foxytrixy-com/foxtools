@@ -104,8 +104,6 @@ venv.bak/
 .mypy_cache/
 
 
-
-#### ADDED
 .idea
 .DS_Store
 *~
